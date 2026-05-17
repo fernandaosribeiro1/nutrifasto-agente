@@ -7,7 +7,7 @@
 
 Uma aplicação web *Fullstack Serverless* focada em saúde e bem-estar, que combina o rastreamento inteligente de calorias com o monitoramento de jejum intermitente em tempo real.
 
-🔗 **[Acesse o projeto em Produção](https://nutrifasto-agente.vercel.app/)** *(Atualize este link quando fizer o deploy)*
+🔗 **[Clique aqui para acessar o projeto!](https://nutrifasto-agente.vercel.app/)** 
 
 ---
 
