@@ -34,6 +34,8 @@ import {
 } from "lucide-react";
 
 import MealModal from "./components/MealModal";
+import AIAssistant from "./components/AIAssistant";
+import WaterTracker from "./components/WaterTracker"; 
 
 import {
   BarChart,
@@ -374,93 +376,195 @@ export default function DashboardPage() {
           </button>
         </div>
 
-        {/* CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* CALORIAS */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 md:col-span-2">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-bold text-gray-700 text-sm flex items-center gap-2">
-                <Utensils size={16} className="text-[#A7D1AB]" />
-                Balanço do Dia Selecionado
+{/* CARDS */}
+<div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8 items-stretch">
+
+  {/* CARD BALANÇO */}
+  <div className="xl:col-span-2 h-full">
+    <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden h-full flex flex-col">
+
+      {/* Glow */}
+      <div className="absolute top-0 right-0 w-40 h-40 bg-[#A7D1AB]/10 blur-3xl rounded-full" />
+
+      <div className="relative z-10 flex flex-col h-full">
+
+        {/* HEADER */}
+        <div className="flex items-start justify-between mb-6 gap-4">
+
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="bg-[#F0F7F2] p-2 rounded-xl">
+                <Utensils size={16} className="text-[#2E4F3B]" />
+              </div>
+
+              <h3 className="font-bold text-gray-800 text-sm">
+                Balanço do Dia
               </h3>
-
-              <span className="text-xs font-bold text-gray-400">
-                {consumedCalories} / {dailyGoal} kcal
-              </span>
             </div>
 
-            <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-              <div
-                className={`h-3 rounded-full transition-all duration-500 ${
-                  consumedCalories > dailyGoal ? "bg-red-500" : "bg-[#2E4F3B]"
-                }`}
-                style={{ width: `${progressPercentage}%` }}
-              ></div>
-            </div>
+            <p className="text-xs text-gray-400">
+              Acompanhe seu consumo diário
+            </p>
           </div>
 
-          {/* JEJUM */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden">
-            {activeFast && (
-              <div className="absolute top-0 left-0 w-full h-1 bg-gray-100">
-                <div
-                  className="h-full bg-[#A7D1AB] transition-all duration-1000"
-                  style={{ width: `${fastProgress}%` }}
-                ></div>
-              </div>
-            )}
+          <div className="text-right">
+            <p className="text-2xl font-black text-[#2E4F3B] leading-none">
+              {consumedCalories}
+            </p>
 
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="font-bold text-gray-700 text-sm flex items-center gap-2">
-                <Timer
-                  size={16}
-                  className={activeFast ? "text-[#A7D1AB] animate-pulse" : "text-gray-400"}
-                />
-                Jejum
-              </h3>
-
-              {activeFast ? (
-                <span className="text-[10px] bg-[#E8EDDF] text-[#2E4F3B] font-bold px-2 py-0.5 rounded-md uppercase">
-                  Ativo ({activeFast.type})
-                </span>
-              ) : (
-                <select
-                  className="text-xs border border-gray-200 rounded-md p-1 outline-none text-gray-600"
-                  value={fastType}
-                  onChange={(e) => setFastType(e.target.value)}
-                >
-                  <option value="16:8">16:8</option>
-                  <option value="18:6">18:6</option>
-                  <option value="20:4">20:4</option>
-                  <option value="24h">24h</option>
-                </select>
-              )}
-            </div>
-
-            <div className="text-center my-4">
-              <span className={`text-2xl font-black ${activeFast ? "text-[#2E4F3B]" : "text-gray-300"}`}>
-                {elapsedFastTime}
-              </span>
-            </div>
-
-            {activeFast ? (
-              <button
-                onClick={handleEndFast}
-                className="w-full bg-red-50 text-red-600 hover:bg-red-100 font-bold text-sm py-2 rounded-xl flex items-center justify-center gap-2 transition-colors"
-              >
-                <Square size={14} /> Encerrar Jejum
-              </button>
-            ) : (
-              <button
-                onClick={handleStartFast}
-                className="w-full bg-[#F0F7F2] text-[#2E4F3B] hover:bg-[#C2D6C6] font-bold text-sm py-2 rounded-xl flex items-center justify-center gap-2 transition-colors"
-              >
-                <Play size={14} /> Iniciar Jejum
-              </button>
-            )}
+            <span className="text-xs text-gray-400 font-medium">
+              de {dailyGoal} kcal
+            </span>
           </div>
         </div>
 
+        {/* PROGRESSO */}
+        <div className="mb-6">
+          <div className="flex justify-between text-[11px] font-medium text-gray-400 mb-2">
+            <span>Progresso</span>
+            <span>{Math.round(progressPercentage)}%</span>
+          </div>
+
+          <div className="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
+            <div
+              className={`h-4 rounded-full transition-all duration-700 ${
+                consumedCalories > dailyGoal
+                  ? "bg-red-500"
+                  : "bg-gradient-to-r from-[#2E4F3B] to-[#A7D1AB]"
+              }`}
+              style={{ width: `${progressPercentage}%` }}
+            />
+          </div>
+        </div>
+
+        {/* WATER TRACKER */}
+        <div className="bg-[#FAFAFA] border border-gray-100 rounded-2xl p-4 mt-auto">
+          <WaterTracker
+            user={user}
+            selectedDateStr={selectedDateStr}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* CARD JEJUM */}
+  <div className="h-full">
+    <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 flex flex-col h-full relative overflow-hidden">
+
+      {/* Glow */}
+      <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#A7D1AB]/10 blur-3xl rounded-full" />
+
+      {activeFast && (
+        <div className="absolute top-0 left-0 w-full h-1 bg-gray-100">
+          <div
+            className="h-full bg-gradient-to-r from-[#A7D1AB] to-[#2E4F3B] transition-all duration-1000"
+            style={{ width: `${fastProgress}%` }}
+          />
+        </div>
+      )}
+
+      <div className="relative z-10 flex flex-col h-full">
+
+        {/* HEADER */}
+        <div className="flex items-center justify-between mb-6">
+
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="bg-[#F0F7F2] p-2 rounded-xl">
+                <Timer
+                  size={16}
+                  className={
+                    activeFast
+                      ? "text-[#2E4F3B] animate-pulse"
+                      : "text-[#2E4F3B]"
+                  }
+                />
+              </div>
+
+              <h3 className="font-bold text-gray-800 text-sm">
+                Jejum Intermitente
+              </h3>
+            </div>
+
+            <p className="text-xs text-gray-400">
+              Controle seu período de jejum
+            </p>
+          </div>
+
+          {activeFast ? (
+            <span className="text-[10px] bg-[#E8EDDF] text-[#2E4F3B] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              {activeFast.type}
+            </span>
+          ) : (
+            <select
+              className="text-xs border border-gray-200 rounded-lg px-2 py-1.5 outline-none text-gray-600"
+              value={fastType}
+              onChange={(e) => setFastType(e.target.value)}
+            >
+              <option value="16:8">16:8</option>
+              <option value="18:6">18:6</option>
+              <option value="20:4">20:4</option>
+              <option value="24h">24h</option>
+            </select>
+          )}
+        </div>
+
+        {/* TIMER */}
+        <div className="flex flex-col items-center justify-center flex-1">
+
+          <div className="w-36 h-36 rounded-full border-[10px] border-[#F0F7F2] flex items-center justify-center relative mb-5">
+
+            <div
+              className="absolute inset-0 rounded-full border-[10px] border-[#A7D1AB]"
+              style={{
+                clipPath: `inset(${100 - fastProgress}% 0 0 0)`,
+              }}
+            />
+
+            <div className="text-center px-2">
+              <p
+                className={`text-xl font-black tracking-tight ${
+                  activeFast
+                    ? "text-[#2E4F3B]"
+                    : "text-gray-300"
+                }`}
+              >
+                {elapsedFastTime}
+              </p>
+
+              <span className="text-[10px] uppercase tracking-widest text-gray-400">
+                tempo atual
+              </span>
+            </div>
+          </div>
+
+          <p className="text-xs text-gray-400 mb-5">
+            {Math.round(fastProgress)}% concluído
+          </p>
+
+          {activeFast ? (
+            <button
+              onClick={handleEndFast}
+              className="w-full bg-red-50 text-red-600 hover:bg-red-100 font-bold text-sm py-3 rounded-2xl flex items-center justify-center gap-2 transition-all"
+            >
+              <Square size={14} />
+              Encerrar Jejum
+            </button>
+          ) : (
+            <button
+              onClick={handleStartFast}
+              className="w-full bg-[#2E4F3B] text-white hover:bg-[#1f3628] font-bold text-sm py-3 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-sm"
+            >
+              <Play size={14} />
+              Iniciar Jejum
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         {/* PLANNER */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-8">
           <div className="flex justify-between items-center mb-3 ml-1">
@@ -730,7 +834,11 @@ export default function DashboardPage() {
       </p>
     </div>
   </div>
+
 </footer>
+
+
+     <AIAssistant /> 
   
       {/* MODAIS */}
       {isModalOpen && (
