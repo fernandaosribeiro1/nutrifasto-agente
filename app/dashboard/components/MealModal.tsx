@@ -37,7 +37,8 @@ export default function MealModal({ user, onClose, mealToEdit }: { user: any, on
     setSearchResults([]);
 
     try {
-      const res = await fetch(`https://br.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(description)}&search_simple=1&action=process&json=1&page_size=6`);
+      // Usando o Rewrite configurado no next.config.ts para evitar bloqueio de CORS
+      const res = await fetch(`/api/food?search_terms=${encodeURIComponent(description)}&search_simple=1&action=process&json=1&page_size=6`);
       const data = await res.json();
 
       if (data.products && data.products.length > 0) {
@@ -156,7 +157,6 @@ export default function MealModal({ user, onClose, mealToEdit }: { user: any, on
             )}
           </div>
 
-          {/* CALORIAS E TIPO (VOLTOU PARA 2 COLUNAS) */}
           <div className="flex gap-4">
             <div className="w-1/2">
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Calorias</label>

@@ -11,9 +11,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Inicializa o Firebase apenas se ele ainda não estiver rodando (evita erros no Next.js)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Exporta as ferramentas que vamos usar no projeto
 export const auth = getAuth(app);
 export const db = getFirestore(app);
