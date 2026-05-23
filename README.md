@@ -42,8 +42,8 @@ O projeto foi desenvolvido com foco em experiência do usuário, responsividade 
 
 ## 📸 Preview
 
-<img width="100%" alt="preview" src="https://github.com/user-attachments/assets/<img width="1280" height="720" alt="preview" src="https://github.com/user-attachments/assets/1a6a352a-4857-4e7f-8139-1d3472701b53" />
-" />
+<img width="1280" height="720" alt="preview" src="https://github.com/user-attachments/assets/1a6a352a-4857-4e7f-8139-1d3472701b53" />
+
 
 ---
 
