@@ -137,9 +137,13 @@ export default function LoginPage() {
             <div>
               <div className="flex justify-between items-center mb-2 ml-1">
                 <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em]">Senha</label>
-                <a href="#" className="text-[11px] text-gray-400 hover:text-[#2E4F3B] hover:underline transition-colors font-semibold">
+                {/* AQUI ESTÁ A ALTERAÇÃO: O LINK AGORA APONTA PARA A ROTA QUE CRIAMOS */}
+                <Link 
+                  href="/recuperar-senha" 
+                  className="text-[11px] text-gray-400 hover:text-[#2E4F3B] hover:underline transition-colors font-semibold"
+                >
                   Esqueceu a senha?
-                </a>
+                </Link>
               </div>
               <input 
                 required

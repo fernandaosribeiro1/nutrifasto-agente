@@ -774,7 +774,6 @@ export default function DashboardPage() {
       </main>
 
 
-
 {/* FOOTER */}
 <footer className="mt-20 bg-[#2E4F3B] text-white border-t border-[#496E58]/40 relative overflow-hidden">
   {/* Detalhe sutil de luz no topo do footer */}
@@ -825,16 +824,21 @@ export default function DashboardPage() {
     {/* DIVIDER */}
     <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#496E58]/40 to-transparent my-8" />
 
-    {/* COPYRIGHT */}
-    <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left text-xs text-[#C2D6C6]/60">
-      <p>© 2026 NutriTrack. Todos os direitos reservados.</p>
-      <p className="flex items-center gap-1.5">
+    {/* COPYRIGHT & AVISO ÉTICO */}
+    <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-xs text-[#C2D6C6]/60">
+      <div>
+        <p>© 2026 NutriTrack. Todos os direitos reservados.</p>
+        <p className="mt-1 text-[11px] text-[#A7D1AB]/70 font-medium max-w-xl">
+          ⚠️ Aviso Ético: Esta aplicação é um exercício acadêmico informativo e não substitui, em hipótese alguma, orientação médica ou nutricional profissional.
+        </p>
+      </div>
+      
+      <p className="flex items-center gap-1.5 shrink-0">
         Feito para uma vida mais saudável 
         <span className="inline-block animate-pulse text-[#A7D1AB]">🌱</span>
       </p>
     </div>
   </div>
-
 </footer>
 
 
